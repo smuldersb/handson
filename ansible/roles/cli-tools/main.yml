@@ -1,0 +1,11 @@
+- name: JQ is present
+  apt:
+    name: jq
+    state: latest
+    force: yes
+
+- name: Tree is present
+  apt:
+    name: tree
+    state: latest
+    force: yes

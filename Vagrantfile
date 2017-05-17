@@ -48,6 +48,7 @@ Vagrant.configure("2") do |config|
     m.vm.hostname = "control"
     m.vm.network "private_network", ip: "10.0.10.100"
     m.vm.provision :shell, path: "scripts/bootstrap_ansible.sh"
+    m.vm.provision :shell, inline: "ansible-playbook /vagrant/ansible/playbook.yml -i /vagrant/ansible/hosts/hosts.yml"
     m.vm.provider "virtualbox" do |v|
       v.memory = 1024
     end

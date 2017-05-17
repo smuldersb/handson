@@ -1,0 +1,30 @@
+---
+- hosts: all
+  remote_user: vagrant
+  roles:
+    - common
+    - docker
+    - consul-template
+
+- hosts: localhost  # control
+  remote_user: vagrant
+  roles:
+    - cli-tools
+    - docker-compose
+    - consul
+
+- hosts: cd
+  remote_user: vagrant
+  roles:
+    - jenkins
+
+- hosts: tst, prd
+  remote_user: vagrant
+  roles:
+    - proxy
+
+- hosts: collaboration
+  remote_user: vagrant
+  roles:
+    - gitlab
+    - docker-registry

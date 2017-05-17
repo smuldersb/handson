@@ -1,0 +1,4 @@
+debian_version: trusty
+ansible_user: vagrant
+ansible_password: vagrant
+

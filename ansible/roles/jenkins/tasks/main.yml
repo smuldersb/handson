@@ -1,0 +1,6 @@
+- name: Container is running
+  docker:
+          name: jenkins
+          image: "jenkins:latest"
+          ports: 8080:8080
+

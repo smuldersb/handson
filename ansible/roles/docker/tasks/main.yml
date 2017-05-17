@@ -1,0 +1,44 @@
+- name: Docker repository added
+  apt_repository:
+    repo: deb https://apt.dockerproject.org/repo ubuntu-{{ debian_version }} main
+    update_cache: yes
+    state: present
+
+- name: Docker is present
+  apt:
+    name: docker-engine
+    state: latest
+    force: yes
+
+- name: Python-pip is present
+  apt:
+    name: python-pip
+    state: present
+    force: yes
+
+- name: Docker-py is present
+  pip:
+    name: docker-py
+    version: 1.6.0
+    state: present
+
+- name: Vagrant user is added to the docker group
+  user:
+    name: vagrant
+    group: docker
+  register: user_result
+
+- name: Docker is restarted
+  service:
+    name: docker
+    state: restarted
+  when: user_result|changed
+
+- name: Docker UI running
+  docker:
+    image: uifd/ui-for-docker
+    name: dockerui
+    ports: 9000:9000
+    privileged: yes
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

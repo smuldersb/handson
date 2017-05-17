@@ -1,0 +1,7 @@
+- name: Container is running
+  docker:
+          name: gitlab
+          image: "sameersbn/gitlab"
+          ports:
+            - "8080:80"
+            - "2222:22"
